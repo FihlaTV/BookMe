@@ -46,5 +46,18 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope, $stateParams , Profiles) {
 	$scope.profiles = Profiles.all();
+    /*
+    $scope.showFilterBar = function () {
+            filterBarInstance = $ionicFilterBar.show({
+                items: $scope.profiles,
+                update: function (filteredItems, filterText) {
+                    $scope.profiles = filteredItems;
+                    if (filterText) {
+                        console.log(filterText);
+                    }
+                }
+            });
+        };
+    **/
 });
 
