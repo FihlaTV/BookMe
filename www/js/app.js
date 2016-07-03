@@ -87,12 +87,12 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
 	 authStatus: true
   })
 
-  .state('app.profile', {
-    url: '/profile/:profileId',
+  .state('app.item', {
+    url: '/item/:profileId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/profile-detail.html',
-        controller: 'ProfileCtrl'
+        templateUrl: 'templates/item-detail.html',
+        controller: 'ItemCtrl'
       }
     }
   });

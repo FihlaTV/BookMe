@@ -40,7 +40,7 @@ angular.module('starter.controllers', [])
   //--------------------------------------------
 })
 
-.controller('ProfileCtrl', function($scope, $stateParams , Profiles) {
+.controller('ItemCtrl', function($scope, $stateParams , Profiles) {
 	$scope.profile = Profiles.get($stateParams.profileId);
 })
 
