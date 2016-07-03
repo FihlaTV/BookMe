@@ -1,0 +1,37 @@
+<ion-view view-title="Dashboard" hide-back-button="true">
+  <ion-content>
+      <!--
+	   <div class="card" ng-repeat="profilelist in profiles" >
+		  <div class="item item-divider">{{profilelist.name}}</div>
+		  <div class="item item-text-wrap">{{profilelist.deseg}}</div>
+	  </div> -->
+      
+      <div class="row responsive-sm">
+        <div class="col" ng-repeat="profilelist in profiles">
+         <div class="list card">
+        
+          <div class="item">
+            <h2>{{profilelist.name}}</h2>
+            <p>{{profilelist.date}}</p>
+          </div>
+
+          <div class="item item-body">
+            <img class="full-image" ng-src="{{profilelist.face}}">
+            <p>
+              {{profilelist.desc}}
+            </p>
+              <div class="item item-divider">
+                  {{profilelist.deseg}}
+              </div>
+            <p>
+                <a class="button button-small button-outline button-positive" href="#/app/profile/{{profilelist.id}}">More Details</a>  
+            </p>
+          </div>
+
+         </div>
+        </div>
+      </div>
+      
+    </ion-list>
+  </ion-content>
+</ion-view>
