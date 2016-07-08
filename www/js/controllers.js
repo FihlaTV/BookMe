@@ -20,7 +20,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 
-		if(user.username=='krismercado' && user.password=='demo'){
+		if(user.username=='admin' && user.password=='admin'){
 			$location.path('/app/dashboard');
 		}else{
 			$scope.showAlert('Invalid username or password.');	

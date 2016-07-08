@@ -1,12 +1,13 @@
 angular.module('starter.services', [])
 
+
 .factory('Profiles', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
   var profiles = [{
     id: 0,
-    name: 'Kris Mercado',
+    name: 'Bea',
     date: 'July 3, 2016',
     deseg: 'PHP 10,000',
     face: 'img/house-for-rent.png',
