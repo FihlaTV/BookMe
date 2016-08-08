@@ -11,10 +11,10 @@ angular.module('starter.controllers', [])
 
   // Form data for the login modal
   $scope.loginData = {};
-
+  $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
   //--------------------------------------------
    $scope.login = function(user) {
-       $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+       
        $http({
           method: 'POST',
           url: 'http://rentalaspacelocator.com/user/applogin',
@@ -60,7 +60,45 @@ angular.module('starter.controllers', [])
 		 template: msg
 	   });
 	 };
+    
+    // An alert dialog
+	 $scope.showAlert2 = function(msg) {
+	   var alertPopup = $ionicPopup.alert({
+		 title: 'Information',
+		 template: msg
+	   });
+	 };
   //--------------------------------------------
+    
+     $scope.register = function(reg) {
+          $http({
+          method: 'POST',
+          url: 'http://rentalaspacelocator.com/user/appregister',
+           transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+           },
+          data: { username: reg.username,password:reg.password,fname: reg.fname,lname: reg.lname }
+        }).then(function successCallback(response) {
+           console.log(response.data);
+              $scope.showAlert2('Registration request sent! Please verify via email.');
+           
+          }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+           console.log('error');
+       });
+       
+
+		if(typeof(reg)=='undefined'){
+			$scope.showAlert('Please fill all required fields.');	
+			return false;
+		}
+         
+     }
+    
 })
 
 .controller('ItemCtrl', function($scope, $stateParams , Profiles) {
