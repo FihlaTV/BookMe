@@ -227,7 +227,13 @@ angular.module('starter.controllers', [])
 .controller('ItemCtrl', function($scope, $stateParams , Profiles) {
     $scope.loadData = function () {
         Profiles.get().success(function(data){
-                 $scope.profile = data[parseInt($stateParams.profileId)-1];
+                  
+               angular.forEach(data, function(value, key) {
+                 if (value['item_id'] == parseInt($stateParams.profileId)){
+                     $scope.profile = value;
+                 }
+                   
+                });
         });
     }
     
