@@ -86,6 +86,17 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
      },
 	 authStatus: true
   })
+  
+   .state('app.post', {
+    url: '/post',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/lessor-post.html',
+		controller: 'DashCtrl'
+      }
+     },
+	 authStatus: true
+  })
 
   .state('app.item', {
     url: '/item/:profileId',

@@ -102,11 +102,16 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ItemCtrl', function($scope, $stateParams , Profiles) {
-	$scope.profile = Profiles.get($stateParams.profileId);
+	Profiles.get().success(function(data){
+             $scope.profile = data[parseInt($stateParams.profileId)-1];
+    });
 })
 
 .controller('DashCtrl', function($scope, $stateParams , Profiles) {
-	$scope.profiles = Profiles.all();
+    //console.log($scope.profiles);
+	Profiles.all().success(function(data){
+        $scope.profiles = data;
+    });
     /*
     $scope.showFilterBar = function () {
             filterBarInstance = $ionicFilterBar.show({
