@@ -114,7 +114,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
     views: {
       'menuContent': {
         templateUrl: 'templates/lessor-post.html',
-		controller: 'DashCtrl'
+		controller: 'PostItemsCtrl'
       }
      },
 	 authStatus: true

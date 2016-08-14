@@ -87,21 +87,14 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup,$http) {
-
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup, $http, $rootScope, Profiles) {
 
   // Form data for the login modal
   $scope.loginData = {};
   $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
   //--------------------------------------------
    $scope.login = function(user) {
-       
+       //$rootScope.user = 'none';
        $http({
           method: 'POST',
           url: 'http://rentalaspacelocator.com/user/applogin',
@@ -115,9 +108,11 @@ angular.module('starter.controllers', [])
         }).then(function successCallback(response) {
             //$scope.user = response.data;
            user.validate = response.data;
+          
            console.log(user.validate);
            
            if(user.validate != 'false'){
+            $rootScope.user = user.username;
 			$location.path('/app/dashboard');
             }else{
                 $scope.showAlert('Invalid username or password.');	
@@ -139,6 +134,11 @@ angular.module('starter.controllers', [])
 	};
   //--------------------------------------------
   $scope.logout = function() {   $location.path('/app/login');   };
+  $scope.refresh = function() {
+            Profiles.all().success(function(data){
+                $scope.profiles = data;
+            });
+   };
   //--------------------------------------------
    // An alert dialog
 	 $scope.showAlert = function(msg) {
@@ -188,17 +188,61 @@ angular.module('starter.controllers', [])
     
 })
 
+.controller('PostItemsCtrl', function($http,$scope, $rootScope, $ionicPopup, Profiles) {
+    
+     // An alert dialog
+	 $scope.showAlert = function(msg) {
+	   var alertPopup = $ionicPopup.alert({
+		 title: 'Information',
+		 template: msg
+	   });
+	 };
+    
+	 $scope.submit = function(item) {
+        $scope.name = $rootScope.user;
+     console.log( item );
+        $http({
+          method: 'POST',
+          url: 'http://rentalaspacelocator.com/user/appadditem',
+           transformRequest: function(obj) {
+            var str = [];
+            for(var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+           },
+          data: { username: $scope.name,space_type:item.space_type,location:item.location,price:item.price,comments:item.comments }
+        }).then(function successCallback(response) {
+            $scope.showAlert('Information Posted!');	
+          }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+           console.log('error');
+       });
+    
+		
+	
+	};
+})
+
 .controller('ItemCtrl', function($scope, $stateParams , Profiles) {
-	Profiles.get().success(function(data){
-             $scope.profile = data[parseInt($stateParams.profileId)-1];
-    });
+    $scope.loadData = function () {
+        Profiles.get().success(function(data){
+                 $scope.profile = data[parseInt($stateParams.profileId)-1];
+        });
+    }
+    
+    $scope.loadData();
 })
 
 .controller('DashCtrl', function($scope, $stateParams , Profiles) {
     //console.log($scope.profiles);
+ $scope.loadData = function () {
 	Profiles.all().success(function(data){
         $scope.profiles = data;
     });
+ }
+    
+    $scope.loadData();
     /*
     $scope.showFilterBar = function () {
             filterBarInstance = $ionicFilterBar.show({
