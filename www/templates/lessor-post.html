@@ -1,12 +1,12 @@
 <ion-view view-title="Details">
   <ion-content>
-
+<form name="myForm" novalidate>
  <div class="list">
   <label class="item item-input item-select">
     <div class="input-label">
       Space Type
     </div>
-    <select>
+    <select ng-model="item.space_type" required>
       <option>Room</option>
       <option selected>Condo</option>
       <option>Apartment</option>
@@ -14,15 +14,15 @@
     </select>
   </label>
   <label class="item item-input">
-    <input type="text" placeholder="Location">
+    <input type="text" ng-model="item.location" placeholder="Location" required>
   </label>
   <label class="item item-input">
-    <input type="text" placeholder="Price Range">
+    <input type="text" ng-model="item.price" placeholder="Price Range" required>
   </label>
   <label class="item item-input">
-    <textarea placeholder="Comments"></textarea>
+    <textarea ng-model="item.comments" placeholder="Comments"></textarea>
   </label>
-  <button class="button button-block button-energized">
+  <button class="button button-block button-energized" ng-disabled="myForm.$invalid" ng-click="submit(item)">
   Submit
   </button>
  <br>    
@@ -32,7 +32,7 @@
   <img class="fit" ng-if="uploadUri" ng-src="">
   <a ng-href="" ng-bind="uploadUri"></a>
 </div>
-
+      </form>
 
   </ion-content>
 </ion-view>
