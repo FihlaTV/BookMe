@@ -34,21 +34,21 @@ angular.module('starter.services', [])
     desc:  'This is a sample new item posted for a new rental near Quezon City.'
   }, {
     id: 1,
-    name: 'Kris Mercado',
+    name: 'Bea',
     date: 'July 4, 2016',
     deseg: 'PHP 11,500',
     face: 'img/house-for-rent2.png',
     desc: ' This is a sample new item posted for a new rental near Pasay City.'
   }, {
     id: 2,
-	name: 'Kris Mercado',
+	name: 'Bea',
     date: 'July 5, 2016',
 	deseg: 'PHP 15,000',
     face: 'img/house-for-rent3.png',
     desc: 'This is a sample new item posted for a new rental near Bonifacio City.'
   }, {
     id: 3,
-    name: 'Kris Mercado',
+    name: 'Bea',
     date: 'July 6, 2016',
     deseg: 'PHP 8,000',
     face: 'img/house-for-rent4.png',
