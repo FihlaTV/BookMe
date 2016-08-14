@@ -17,11 +17,11 @@
     </ion-header-bar>
    <div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
     <div class="tabs">
-      <a class="tab-item active" href="#/app/message">
+      <a class="tab-item" href="#/app/message">
         <i class="icon ion-email"></i>
        
       </a>
-      <a class="tab-item" href="#/app/unread">
+      <a class="tab-item active" href="#/app/unread">
         <i class="icon ion-email-unread"></i>
       
       </a>
@@ -45,15 +45,6 @@
       </div>
 
     </ion-content>
-
-    <ion-footer-bar keyboard-attach class="bar-stable item-input-inset">
-      <label class="item-input-wrapper">
-        <input type="text" placeholder="Type your message" on-return="sendMessage(); closeKeyboard()" ng-model="data.message" on-focus="inputUp()" on-blur="inputDown()" />
-      </label>
-      <button class="button button-clear" ng-click="sendMessage()">
-        Send
-      </button>
-    </ion-footer-bar>
                                                                   
 
   </ion-pane>

@@ -98,6 +98,17 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
 	 authStatus: true
   })
   
+  .state('app.unread', {
+    url: '/unread',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/unread.html',
+		controller: 'Messages'
+      }
+     },
+	 authStatus: true
+  })
+  
    .state('app.post', {
     url: '/post',
     views: {
