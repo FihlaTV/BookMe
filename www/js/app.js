@@ -87,6 +87,17 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
 	 authStatus: true
   })
   
+   .state('app.message', {
+    url: '/message',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/messaging.html',
+		controller: 'Messages'
+      }
+     },
+	 authStatus: true
+  })
+  
    .state('app.post', {
     url: '/post',
     views: {
