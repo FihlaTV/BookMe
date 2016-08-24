@@ -187,6 +187,35 @@ angular.module('starter.controllers', [])
 	};
 })
 
+.controller('SearchCtrl', function($http,$scope, $rootScope, $ionicPopup, $stateParams , Profiles) {
+    
+     // An alert dialog
+	 $scope.showAlert = function(msg) {
+	   var alertPopup = $ionicPopup.alert({
+		 title: 'Information',
+		 template: msg
+	   });
+	 };
+    
+	 $scope.search = function(item) {
+          var data = $.param({
+                json: JSON.stringify({
+                    space_type:item.space_type,
+                    location:item.location,
+                    from_price:item.from_price,
+                    to_price:item.to_price
+                })
+            });
+         
+          $http.post("http://rentalaspacelocator.com/user/searchitem", data).success(function(data, status) {
+                    console.log(data);
+              
+                  $scope.profiles = data;
+          });
+    };
+
+})
+
 .controller('ItemCtrl', function($scope, $stateParams , Profiles) {
     $scope.loadData = function () {
         Profiles.get().success(function(data){

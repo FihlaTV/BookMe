@@ -1,0 +1,60 @@
+<ion-view view-title="Search">
+  <ion-content>
+    <div class="list list-inset">
+    <form name="myForm" novalidate>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Space Type
+        </div>
+        <select ng-model="item.space_type">
+          <option>Room</option>
+          <option selected>Condo</option>
+          <option>Apartment</option>
+          <option>House</option>
+        </select>
+      </label>
+      <label class="item item-input">
+        <input type="text" ng-model="item.location" placeholder="Location">
+      </label>
+      <label class="item item-input">
+        FROM: <input type="text" ng-model="item.from_price" placeholder="Price Range" required> 
+      </label>
+        <label class="item item-input">
+            TO: 
+        <input type="text" ng-model="item.to_price" placeholder="Price Range" required>
+      </label>
+        
+       <button class="button button-block button-positive" ng-disabled="myForm.$invalid" ng-click="search(item)">
+         Search
+        </button>
+     </form>
+    </div>
+      
+      <div class="row responsive-sm">
+        
+        <div class="col" ng-repeat="profilelist in profiles">
+         <div class="list card" >
+       
+          <div class="item">
+            <h2>{{profilelist.fname}} {{profilelist.lname}}</h2>
+            <p>{{profilelist.date_created}}</p>
+          </div>
+
+          <div class="item item-body">
+            <img class="full-image" ng-src="img/for-rent.jpg">
+            <p>
+              {{profilelist.location}}
+            </p>
+              <div class="item item-divider">
+                  PHP {{profilelist.price}}
+              </div>
+            <p>
+                <a class="button button-small button-outline button-positive" href="#/app/item/{{profilelist.item_id}}">More Details</a>  
+            </p>
+          </div>
+
+         </div>
+        </div>
+      </div>
+  </ion-content>
+</ion-view>
