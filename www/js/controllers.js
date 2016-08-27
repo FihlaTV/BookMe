@@ -50,8 +50,44 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup, $http, $rootScope, Profiles) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup, $http, $rootScope, Profiles,FileTransfer, FileUploadOptions) {
 
+	$ionicPlatform.ready(function() {
+		 console.log(FileTransfer);
+	});
+	
+	$scope.upload(){
+		
+		 var fileURL = "///"
+   var uri = encodeURI("http://posttestserver.com/post.php");
+   var options = new FileUploadOptions();
+	
+   options.fileKey = "file";
+   options.fileName = fileURL.substr(fileURL.lastIndexOf('/')+1);
+   options.mimeType = "text/plain";
+
+   var headers = {'headerParam':'headerValue'};
+   options.headers = headers;
+
+   var ft = new FileTransfer();
+
+   ft.upload(fileURL, uri, onSuccess, onError, options);
+
+   function onSuccess(r) {
+      console.log("Code = " + r.responseCode);
+      console.log("Response = " + r.response);
+      console.log("Sent = " + r.bytesSent);
+   }
+
+   function onError(error) {
+      alert("An error has occurred: Code = " + error.code);
+      console.log("upload error source " + error.source);
+      console.log("upload error target " + error.target);
+   }
+	
+	}
+	
+	
   // Form data for the login modal
   $scope.loginData = {};
   $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";

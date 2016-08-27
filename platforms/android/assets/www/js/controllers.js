@@ -1,42 +1,5 @@
 angular.module('starter.controllers', [])
 
-.directive('input', function($timeout) {
-  return {
-    restrict: 'E',
-    scope: {
-      'returnClose': '=',
-      'onReturn': '&',
-      'onFocus': '&',
-      'onBlur': '&'
-    },
-    link: function(scope, element, attr) {
-      element.bind('focus', function(e) {
-        if (scope.onFocus) {
-          $timeout(function() {
-            scope.onFocus();
-          });
-        }
-      });
-      element.bind('blur', function(e) {
-        if (scope.onBlur) {
-          $timeout(function() {
-            scope.onBlur();
-          });
-        }
-      });
-      element.bind('keydown', function(e) {
-        if (e.which == 13) {
-          if (scope.returnClose) element[0].blur();
-          if (scope.onReturn) {
-            $timeout(function() {
-              scope.onReturn();
-            });
-          }
-        }
-      });
-    }
-  }
-})
 
 .controller('Messages', function($scope, $timeout, $ionicScrollDelegate) {
 
@@ -222,6 +185,35 @@ angular.module('starter.controllers', [])
 		
 	
 	};
+})
+
+.controller('SearchCtrl', function($http,$scope, $rootScope, $ionicPopup, $stateParams , Profiles) {
+    
+     // An alert dialog
+	 $scope.showAlert = function(msg) {
+	   var alertPopup = $ionicPopup.alert({
+		 title: 'Information',
+		 template: msg
+	   });
+	 };
+    
+	 $scope.search = function(item) {
+          var data = $.param({
+                json: JSON.stringify({
+                    space_type:item.space_type,
+                    location:item.location,
+                    from_price:item.from_price,
+                    to_price:item.to_price
+                })
+            });
+         
+          $http.post("http://rentalaspacelocator.com/user/searchitem", data).success(function(data, status) {
+                    console.log(data);
+              
+                  $scope.profiles = data;
+          });
+    };
+
 })
 
 .controller('ItemCtrl', function($scope, $stateParams , Profiles) {
