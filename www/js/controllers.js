@@ -50,43 +50,9 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup, $http, $rootScope, Profiles,FileTransfer, FileUploadOptions) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup, $http, $rootScope, Profiles) {
 
-	$ionicPlatform.ready(function() {
-		 console.log(FileTransfer);
-	});
-	
-	$scope.upload(){
-		
-		 var fileURL = "///"
-   var uri = encodeURI("http://posttestserver.com/post.php");
-   var options = new FileUploadOptions();
-	
-   options.fileKey = "file";
-   options.fileName = fileURL.substr(fileURL.lastIndexOf('/')+1);
-   options.mimeType = "text/plain";
 
-   var headers = {'headerParam':'headerValue'};
-   options.headers = headers;
-
-   var ft = new FileTransfer();
-
-   ft.upload(fileURL, uri, onSuccess, onError, options);
-
-   function onSuccess(r) {
-      console.log("Code = " + r.responseCode);
-      console.log("Response = " + r.response);
-      console.log("Sent = " + r.bytesSent);
-   }
-
-   function onError(error) {
-      alert("An error has occurred: Code = " + error.code);
-      console.log("upload error source " + error.source);
-      console.log("upload error target " + error.target);
-   }
-	
-	}
-	
 	
   // Form data for the login modal
   $scope.loginData = {};
@@ -187,7 +153,90 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('PostItemsCtrl', function($http,$scope, $rootScope, $ionicPopup, Profiles) {
+.controller('PostItemsCtrl', function($http,$scope, $rootScope, $ionicPopup, Profiles, FileTransfer, FileUploadOptions) {
+    
+    /**
+    *    Uploading Function
+    **/
+    
+    
+    $ionicPlatform.ready(function() {
+		 console.log(FileTransfer);
+	});
+	
+    function getimage(){
+         navigator.camera.getPicture(uploadPhoto, function(message) {
+                      alert('get picture failed');
+                  },{
+                      quality: 50,
+                      destinationType: navigator.camera.DestinationType.FILE_URI,
+                      sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+                  }
+          );
+    }
+    
+	function uploadPhoto(imageURI){
+         var options = new FileUploadOptions();
+          options.fileKey="file";
+          options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+          options.mimeType="image/jpeg";
+
+          var params = new Object();
+          params.value1 = "test";
+          params.value2 = "param";
+
+          options.params = params;
+          options.chunkedMode = false;
+
+          var ft = new FileTransfer();
+          ft.upload(imageURI, "http://rentalaspacelocator.com/user/appupload", win, fail, options);
+        
+      /**		
+       var fileURL = "///"
+       var uri = encodeURI("http://posttestserver.com/post.php");
+       var options = new FileUploadOptions();
+
+       options.fileKey = "file";
+       options.fileName = fileURL.substr(fileURL.lastIndexOf('/')+1);
+       options.mimeType = "text/plain";
+
+       var headers = {'headerParam':'headerValue'};
+       options.headers = headers;
+
+       var ft = new FileTransfer();
+
+       ft.upload(fileURL, uri, onSuccess, onError, options);
+
+       function onSuccess(r) {
+          console.log("Code = " + r.responseCode);
+          console.log("Response = " + r.response);
+          console.log("Sent = " + r.bytesSent);
+       }
+
+       function onError(error) {
+          alert("An error has occurred: Code = " + error.code);
+          console.log("upload error source " + error.source);
+          console.log("upload error target " + error.target);
+       }
+	  **/
+	}
+    
+     function win(r) {
+          console.log("Code = " + r.responseCode.toString()+"\n");
+          console.log("Response = " + r.response.toString()+"\n");
+          console.log("Sent = " + r.bytesSent.toString()+"\n");
+          alert("Code Slayer!!!");
+      }
+
+      function fail(error) {
+          alert("An error has occurred: Code = " + error.code);
+      }
+
+	
+    
+    
+    // ----------------------------------------
+    
     
      // An alert dialog
 	 $scope.showAlert = function(msg) {

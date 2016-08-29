@@ -27,8 +27,8 @@
   </button>
  <br>    
 <div class="item item-divider"> Upload Images </div>
-      <input class="bottom-marg-15" type="file" name="file" file="file">
-  <button class="button button-small button-full button-positive" ng-disabled="file.size&amp;&amp;false || uploadProgress&gt;0" ng-click="upload()" ng-cloak="">Upload</button>
+      <input class="bottom-marg-15" type="file"  name="file" file="file">
+  <button class="button button-small button-full button-positive" onclick="getImage();" ng-cloak="">Upload</button>
   <img class="fit" ng-if="uploadUri" ng-src="">
   <a ng-href="" ng-bind="uploadUri"></a>
 </div>
