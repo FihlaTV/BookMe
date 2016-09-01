@@ -153,12 +153,40 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('PostItemsCtrl', function($http,$scope, $rootScope, $ionicPopup, Profiles,  $cordovaFileTransfer, $cordovaCamera) {
+.controller('PostItemsCtrl', function($http, $scope, $rootScope, $ionicPopup, Profiles,  $cordovaFileTransfer, $cordovaCamera, $cordovaImagePicker) {
+    
+    /*
+    *  Multiple image picker function
+    */
+    
+     $scope.pickImages = function() {
+        var options = {
+          maximumImagesCount: 10,
+          width: 800,
+          height: 800,
+          quality: 80
+        };
+
+        $cordovaImagePicker.getPictures(options)
+            .then(function (results) {
+              for (var i = 0; i < results.length; i++) {
+                console.log('Image URI: ' + results[i]);
+                $scope.images.push(results[i]);
+              }
+            }, function(error) {
+              // error getting photos
+            });
+
+    };
+
+      $scope.removeImage = function(image) {
+        $scope.images = _.without($scope.images, image);
+      };
+    
     
     /**
     *   Uploading function v2
    
-    
     
     $scope.takePicture = function() {
 
@@ -172,7 +200,7 @@ angular.module('starter.controllers', [])
 			targetWidth: 400,
 			targetHeight: 400,
 			popoverOptions: CameraPopoverOptions,
-			saveToPhotoAlbum: false
+			saveToPhotoAlbum: true
 		};
 
 		console.log( ">>>>> "+  options.destinationType );
@@ -221,49 +249,55 @@ angular.module('starter.controllers', [])
     /**
     *    Uploading Function v1
     **/
-    $ionicPlatform.ready(function() {
-		 console.log(FileTransfer);
-	});
 	
-    function getimage(){
-         navigator.camera.getPicture(uploadPhoto, function(message) {
-                      alert('get picture failed');
-                  },{
-                      quality: 50,
-                      destinationType: navigator.camera.DestinationType.FILE_URI,
-                      sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
-                  }
-          );
+    $scope.openPhotoLibrary = function() {
+        var options = {
+            quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            allowEdit: true,
+            encodingType: Camera.EncodingType.JPEG,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+        };
+
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+
+            //console.log(imageData);
+            //console.log(options);   
+            $scope.uploadUri = "data:image/jpeg;base64," + imageData;
+            
+            var server = "http://rentalaspacelocator.com/user/appupload",
+                filePath = imageData;
+
+            var date = new Date();
+
+            var options = {
+                fileKey: "file",
+                fileName: imageData.substr(imageData.lastIndexOf('/') + 1),
+                chunkedMode: false,
+                mimeType: "image/jpg"
+            };
+
+            $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
+                console.log("SUCCESS: " + JSON.stringify(result.response));
+                console.log('Result_' + result.response[0] + '_ending');
+                alert("success");
+                alert(JSON.stringify(result.response));
+
+            }, function(err) {
+                console.log("ERROR: " + JSON.stringify(err));
+                //alert(JSON.stringify(err));
+            }, function (progress) {
+                // constant progress updates
+            });
+
+
+        }, function(err) {
+            // error
+            console.log(err);
+        });
     }
-    
-	function uploadPhoto(imageURI){
-         var options = new FileUploadOptions();
-          options.fileKey="file";
-          options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
-          options.mimeType="image/jpeg";
-        
-          var params = new Object();
-          params.value1 = "test";
-          params.value2 = "param";
-
-          options.params = params;
-          options.chunkedMode = false;
-
-          var ft = new FileTransfer();
-          ft.upload(imageURI, encodeURI("http://rentalaspacelocator.com/user/appupload"), win, fail, options);
-	}
-    
-     function win(r) {
-          console.log("Code = " + r.responseCode.toString()+"\n");
-          console.log("Response = " + r.response.toString()+"\n");
-          console.log("Sent = " + r.bytesSent.toString()+"\n");
-          alert("Code Slayer!!!");
-      }
-
-      function fail(error) {
-          alert("An error has occurred: Code = " + error.code);
-      }
-
 	
     
     
