@@ -1,0 +1,31 @@
+<div class="tabs-striped  tabs-background-positive tabs-color-light">
+    <div class="tabs">
+      <a class="tab-item " href="#/app/login"><i class="icon ion-unlocked"></i> Login </a>
+      <a class="tab-item active" href="#/app/signup"> <i class="icon ion-person"></i> Sing Up </a>
+    </div>
+  </div>
+
+<ion-view view-title="Sign Up" class="loginBg" hide-nav-bar="true" >
+  <ion-content class="padding">
+
+  <div class="row responsive-sm padding remvoeBP">
+	  <div class="col">
+		   <div class="app-logo"><img src="img/logo.png"></div>
+			<form name="myForm" novalidate>
+			<div class="list list-inset removePM">
+			  <label class="item item-input"><input type="text" ng-model="reg.fname" placeholder="First Name"  required> </label>
+              <label class="item item-input"><input type="text" ng-model="reg.lname" placeholder="Last Name"  required> </label>
+			  <label class="item item-input"><input type="text" ng-model="reg.username" placeholder="Email Address"  required> </label>
+			  <label class="item item-input"><input type="password" ng-model="reg.password" placeholder="Password" required> </label>
+			</div><br>
+				<ion-list>
+  					<ion-checkbox ng-model="reg.terms" required><a href="#/app/termsandcondition">Terms and Conditions</a></ion-checkbox>
+				</ion-list>
+			<div class="loginButton"><button class="button ion-person button-block button-balanced" ng-click="register(reg);" ng-disabled="myForm.$invalid"> Register </button>  </div>
+          </form>
+	  </div>
+  </div>
+
+
+  </ion-content>
+</ion-view>

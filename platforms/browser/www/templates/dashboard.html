@@ -1,0 +1,39 @@
+<ion-view view-title="Dashboard" hide-back-button="true">
+  <ion-content>
+      <button class="button button-assertive" ng-click="loadData()">
+            <i class="icon ion-ios-loop" ></i>
+          </button> &nbsp;&nbsp;
+      <!--
+	   <div class="card" ng-repeat="profilelist in profiles" >
+		  <div class="item item-divider">{{profilelist.name}}</div>
+		  <div class="item item-text-wrap">{{profilelist.deseg}}</div>
+	  </div> -->
+      
+      <div class="row responsive-sm">
+        <div class="col" ng-repeat="profilelist in profiles">
+         <div class="list card">
+        
+          <div class="item">
+            <h2>{{profilelist.fname}} {{profilelist.lname}}</h2>
+            <p>{{profilelist.date_created}}</p>
+          </div>
+
+          <div class="item item-body">
+            <img class="full-image" ng-src="img/for-rent.jpg">
+            <p>
+              {{profilelist.location}}
+            </p>
+              <div class="item item-divider">
+                  PHP {{profilelist.price}}
+              </div>
+            <p>
+                <a class="button button-small button-outline button-positive" href="#/app/item/{{profilelist.item_id}}">More Details</a>  
+            </p>
+          </div>
+
+         </div>
+        </div>
+      </div>
+      
+  </ion-content>
+</ion-view>

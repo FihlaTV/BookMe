@@ -153,7 +153,36 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('PostItemsCtrl', function($http,$scope, $rootScope, $ionicPopup, Profiles,  $cordovaFileTransfer, $cordovaCamera) {
+.controller('PostItemsCtrl', function($http, $scope, $rootScope, $ionicPopup, Profiles,  $cordovaFileTransfer, $cordovaCamera, $cordovaImagePicker) {
+    
+    /*
+    *  Multiple image picker function
+    */
+    
+     $scope.pickImages = function() {
+        var options = {
+          maximumImagesCount: 10,
+          width: 800,
+          height: 800,
+          quality: 80
+        };
+
+        $cordovaImagePicker.getPictures(options)
+            .then(function (results) {
+              for (var i = 0; i < results.length; i++) {
+                console.log('Image URI: ' + results[i]);
+                $scope.images.push(results[i]);
+              }
+            }, function(error) {
+              // error getting photos
+            });
+
+    };
+
+      $scope.removeImage = function(image) {
+        $scope.images = _.without($scope.images, image);
+      };
+    
     
     /**
     *   Uploading function v2
@@ -221,9 +250,6 @@ angular.module('starter.controllers', [])
     /**
     *    Uploading Function v1
     **/
-    $ionicPlatform.ready(function() {
-		 console.log(FileTransfer);
-	});
 	
     function getimage(){
          navigator.camera.getPicture(uploadPhoto, function(message) {
