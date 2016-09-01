@@ -52,6 +52,8 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup, $http, $rootScope, Profiles) {
 
+
+	
   // Form data for the login modal
   $scope.loginData = {};
   $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
@@ -151,7 +153,122 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('PostItemsCtrl', function($http,$scope, $rootScope, $ionicPopup, Profiles) {
+.controller('PostItemsCtrl', function($http,$scope, $rootScope, $ionicPopup, Profiles,  $cordovaFileTransfer, $cordovaCamera) {
+    
+    /**
+    *   Uploading function v2
+   
+    
+    
+    $scope.takePicture = function() {
+
+		var options = {
+			quality: 45,
+			//destinationType: Camera.DestinationType.NATIVE_URI,
+			destinationType: Camera.DestinationType.FILE_URI,
+		        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+			allowEdit: true,
+			encodingType: Camera.EncodingType.JPEG,
+			targetWidth: 400,
+			targetHeight: 400,
+			popoverOptions: CameraPopoverOptions,
+			saveToPhotoAlbum: false
+		};
+
+		console.log( ">>>>> "+  options.destinationType );
+		console.log( ">>>>> "+  options.sourceType );
+
+		$cordovaCamera.getPicture(options).then(function(imageURI) {
+			$scope.newPost.picture = imageURI;
+			console.log("Pic taken: " + $scope.newPost.picture);
+		}, function(err) {
+			// error
+			console.log("Camera ERR: " + err);
+		});
+	};
+    
+      $scope.uploadPicture = function() {
+         var options = {
+            fileKey: "file",
+            fileName: imageURI.substr(imageURI.lastIndexOf('/')+1),
+            chunkedMode: false,
+            mimeType: "image/jpg",
+             params: {
+            "text": text,
+            "channel_id": chId,
+            "headers": {
+                'Authorization': credentials.token_type + ' ' + credentials.access_token
+                }
+            }
+         };
+
+         $cordovaFileTransfer.upload("http://rentalaspacelocator.com/user/appupload", imageURI, options, true).then(function(result) {
+                    console.log("New post with picture success");
+                    return JSON.parse(result.response);
+                  }, function(err) {
+                        console.log("ERROR: " + JSON.stringify(err)); 
+                        console.log(  options );
+                        console.log( imageURI );
+                  }, function (progress) {
+                        // constant progress updates
+                        console.log( progress );
+                  });
+
+      }
+       */
+      
+      
+    /**
+    *    Uploading Function v1
+    **/
+    $ionicPlatform.ready(function() {
+		 console.log(FileTransfer);
+	});
+	
+    function getimage(){
+         navigator.camera.getPicture(uploadPhoto, function(message) {
+                      alert('get picture failed');
+                  },{
+                      quality: 50,
+                      destinationType: navigator.camera.DestinationType.FILE_URI,
+                      sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+                  }
+          );
+    }
+    
+	function uploadPhoto(imageURI){
+         var options = new FileUploadOptions();
+          options.fileKey="file";
+          options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+          options.mimeType="image/jpeg";
+        
+          var params = new Object();
+          params.value1 = "test";
+          params.value2 = "param";
+
+          options.params = params;
+          options.chunkedMode = false;
+
+          var ft = new FileTransfer();
+          ft.upload(imageURI, encodeURI("http://rentalaspacelocator.com/user/appupload"), win, fail, options);
+	}
+    
+     function win(r) {
+          console.log("Code = " + r.responseCode.toString()+"\n");
+          console.log("Response = " + r.response.toString()+"\n");
+          console.log("Sent = " + r.bytesSent.toString()+"\n");
+          alert("Code Slayer!!!");
+      }
+
+      function fail(error) {
+          alert("An error has occurred: Code = " + error.code);
+      }
+
+	
+    
+    
+    // ----------------------------------------
+    
     
      // An alert dialog
 	 $scope.showAlert = function(msg) {

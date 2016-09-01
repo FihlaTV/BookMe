@@ -7,10 +7,16 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.ionicframework.bookme559860"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.bookme559860"
         },
         "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.bookme559860"
+        },
+        "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.ionicframework.bookme559860"
         },
         "cordova-plugin-splashscreen": {
@@ -23,9 +29,6 @@
             "PACKAGE_NAME": "com.ionicframework.bookme559860"
         },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.bookme559860"
-        },
-        "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.ionicframework.bookme559860"
         }
     },
