@@ -276,12 +276,13 @@ angular.module('starter.controllers', [])
                 fileKey: "file",
                 fileName: imageData.substr(imageData.lastIndexOf('/') + 1),
                 chunkedMode: false,
-                mimeType: "image/jpg"
+                mimeType: "image/jpg",
+                 params: {
+                    "value1": 'sample upload'
+                 }
             };
 
             $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
-                console.log("SUCCESS: " + JSON.stringify(result.response));
-                console.log('Result_' + result.response[0] + '_ending');
                 alert("success");
                 alert(JSON.stringify(result.response));
 
