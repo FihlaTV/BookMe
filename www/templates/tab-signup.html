@@ -19,7 +19,7 @@
 			  <label class="item item-input"><input type="password" ng-model="reg.password" placeholder="Password" required> </label>
 			</div><br>
 				<ion-list>
-  					<ion-checkbox ng-model="reg.terms" required><a href="#/app/termsandcondition">Terms and Conditions</a></ion-checkbox>
+  					<ion-checkbox ng-model="reg.terms" ng-click="terms.show()" required><a href="#">Terms and Conditions</a></ion-checkbox>
 				</ion-list>
 			<div class="loginButton"><button class="button ion-person button-block button-balanced" ng-click="register(reg);" ng-disabled="myForm.$invalid"> Register </button>  </div>
           </form>

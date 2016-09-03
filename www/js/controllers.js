@@ -122,6 +122,19 @@ angular.module('starter.controllers', [])
 	 };
   //--------------------------------------------
     
+    $ionicModal.fromTemplateUrl('templates/termsandcondition.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.terms = modal;
+  });
+  $scope.openModal = function() {
+    $scope.terms.show();
+  };
+  $scope.closeModal = function() {
+    $scope.terms.hide();
+  };
+    
      $scope.register = function(reg) {
           $http({
           method: 'POST',
@@ -134,8 +147,13 @@ angular.module('starter.controllers', [])
            },
           data: { username: reg.username,password:reg.password,fname: reg.fname,lname: reg.lname }
         }).then(function successCallback(response) {
-           console.log(response.data);
-              $scope.showAlert2('Registration request sent! Please verify via email.');
+             console.log(response.data);
+              if(response.data == "false"){
+                  $scope.showAlert('Username is already existing. Please try a new one.');
+               }else{
+                   $scope.showAlert2('Registration request sent! Please verify via email.');
+               }
+              
            
           }, function errorCallback(response) {
             // called asynchronously if an error occurs

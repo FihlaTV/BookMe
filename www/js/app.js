@@ -140,16 +140,6 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services', 
 	 authStatus: true
   })
   
-  .state('app.termsandcondition', {
-    url: '/termsandcondition',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/termsandcondition.html'
-      }
-     },
-	 authStatus: true
-  })
-  
   .state('app.item', {
     url: '/item/:profileId',
     views: {
