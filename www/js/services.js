@@ -4,10 +4,10 @@ angular.module('starter.services', [])
     
  return {
         all: function() {
-          return $http.get("http://rentalaspacelocator.com/user/profile");
+          return $http.get("http://rentalaspacelocator.com/user/profile/");
         },
         get: function(username) {
-              return $http.get("http://rentalaspacelocator.com/user/profile"+username);
+              return $http.get("http://rentalaspacelocator.com/user/profile/"+username);
         }
        };
   
