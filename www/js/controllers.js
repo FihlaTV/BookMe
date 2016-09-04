@@ -227,7 +227,7 @@ angular.module('starter.controllers', [])
     $scope.openPhotoLibrary = function() {
         var options = {
             quality: 50,
-            destinationType: Camera.DestinationType.DATA_URL,
+            destinationType: Camera.DestinationType.NATIVE_URI,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             allowEdit: true,
             encodingType: Camera.EncodingType.JPEG,
