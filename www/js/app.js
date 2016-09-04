@@ -140,6 +140,17 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services', 
 	 authStatus: true
   })
   
+    .state('app.profile', {
+    url: '/profile',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/profile.html',
+        controller: 'UserProfileCtrl'
+      }
+     },
+	 authStatus: true
+  })
+  
   .state('app.item', {
     url: '/item/:profileId',
     views: {

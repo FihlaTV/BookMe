@@ -236,10 +236,9 @@ angular.module('starter.controllers', [])
         };
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
-
+                 $scope.name = $rootScope.user;
             //console.log(imageData);
             //console.log(options);   
-            $scope.uploadUri = "data:image/jpeg;base64," + imageData;
             
             var server = "http://rentalaspacelocator.com/user/appupload",
                 filePath = imageData;
@@ -252,11 +251,12 @@ angular.module('starter.controllers', [])
                 chunkedMode: false,
                 mimeType: "image/jpg",
                  params: {
-                    "value1": 'sample upload'
+                    "value1": $scope.name
                  }
             };
 
             $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
+                alert("ImageData:" + filePath);
                 alert("success");
                 alert(JSON.stringify(result.response));
 
@@ -342,7 +342,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ItemCtrl', function($scope, $stateParams , Profiles) {
+.controller('ItemCtrl', function($scope, $stateParams ,  Profiles) {
     $scope.loadData = function () {
         Profiles.get().success(function(data){
                   
@@ -358,6 +358,17 @@ angular.module('starter.controllers', [])
     $scope.loadData();
 })
 
+.controller('UserProfileCtrl', function($scope, User,  $rootScope){
+     $scope.loadData = function () {
+          $scope.name = $rootScope.user;
+	   User.get($scope.name).success(function(data){
+                     $scope.userprofile = value;
+        });
+ }
+    
+    $scope.loadData();
+})
+
 .controller('DashCtrl', function($scope, $stateParams , Profiles) {
     //console.log($scope.profiles);
  $scope.loadData = function () {
@@ -367,18 +378,6 @@ angular.module('starter.controllers', [])
  }
     
     $scope.loadData();
-    /*
-    $scope.showFilterBar = function () {
-            filterBarInstance = $ionicFilterBar.show({
-                items: $scope.profiles,
-                update: function (filteredItems, filterText) {
-                    $scope.profiles = filteredItems;
-                    if (filterText) {
-                        console.log(filterText);
-                    }
-                }
-            });
-        };
-    **/
+   
 });
 
