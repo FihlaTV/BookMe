@@ -361,8 +361,12 @@ angular.module('starter.controllers', [])
 .controller('UserProfileCtrl', function($scope, User,  $rootScope){
      $scope.loadData = function () {
           $scope.name = $rootScope.user;
+         
 	   User.get($scope.name).success(function(data){
+          
+             angular.forEach(data, function(value, key) {
                      $scope.userprofile = value;
+                });
         });
  }
     
