@@ -227,7 +227,7 @@ angular.module('starter.controllers', [])
     $scope.openPhotoLibrary = function() {
         var options = {
             quality: 50,
-            destinationType: Camera.DestinationType.NATIVE_URI,
+            destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             allowEdit: true,
             encodingType: Camera.EncodingType.JPEG,
@@ -238,18 +238,24 @@ angular.module('starter.controllers', [])
         };
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
+            $scope.imageDataProfile = "data:image/jpeg;base64," + imageData);
+                  document.getElementById('uploadUri').src = imageDataProfile;
+           
+            
+            var img = document.getElementById('uploadUri');
+                var imageURI = img.src;
                  $scope.name = $rootScope.user;
             //console.log(imageData);
             //console.log(options);   
             
             var server = "http://rentalaspacelocator.com/user/appupload",
-                filePath = imageData;
+                filePath = imageURI;
 
             var date = new Date();
 
             var options = {
                 fileKey: "file",
-                fileName: imageData.substr(imageData.lastIndexOf('/') + 1),
+                fileName: imageURI.substr(imageURI.lastIndexOf('/') + 1),
                 chunkedMode: false,
                 mimeType: "image/jpg",
                  params: {
