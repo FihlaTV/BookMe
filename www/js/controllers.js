@@ -218,13 +218,12 @@ angular.module('starter.controllers', [])
 
       }
        */
-      
-      
     /**
     *    Uploading Function v1
     **/
 	
-    $scope.openPhotoLibrary = function() {
+    $scope.openPhotoLibrary = function(item) {
+         $scope.name = $rootScope.user;
         var options = {
             quality: 50,
             destinationType: Camera.DestinationType.FILE_URI,
@@ -249,11 +248,11 @@ angular.module('starter.controllers', [])
 
             var options = {
                 fileKey: "file",
-                fileName: "testimage.jpg",
+                fileName: ((Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4)+".jpg",
                 chunkedMode: false,
                 mimeType: "image/jpg",
                  params: {
-                    "value1": $scope.name
+                    "username": $scope.name,"space_type":item.space_type,"location":item.location,"price":item.price,"comments":item.comments
                  }
             };
 
@@ -279,6 +278,7 @@ angular.module('starter.controllers', [])
     
     
     // ----------------------------------------
+    
     
     
      // An alert dialog

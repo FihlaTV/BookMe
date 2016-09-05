@@ -22,15 +22,16 @@
   <label class="item item-input">
     <textarea ng-model="item.comments" placeholder="Description"></textarea>
   </label>
-  <button class="button button-block button-energized" ng-disabled="myForm.$invalid" ng-click="submit(item)">
+  <!--<button class="button button-block button-energized" ng-disabled="myForm.$invalid" ng-click="submit(item)">
   Submit
-  </button>
+  </button> -->
  <br>    
-<div class="item item-divider"> Upload Images </div>
+<div class="item item-divider"> Upload Image </div>
+      <center><img class="fit" ng-if="uploadUri" ng-src="{{uploadUri}}"></center>
      <!-- <input class="bottom-marg-15" type="file"  name="file" file="file"> 
      <button class="button button-small button-full button-positive" ng-click="pickImages()" ng-cloak="">Pick Images</button>-->
-  <button class="button button-small button-full button-positive" ng-click="openPhotoLibrary()" ng-cloak="">Upload Image</button>
-  <img class="fit" ng-if="uploadUri" ng-src="{{uploadUri}}">
+  <button class="button button-full button-positive" ng-click="openPhotoLibrary(item)" ng-disabled="myForm.$invalid" ng-cloak="">Submit</button>
+ 
 </div>
       </form>
 

@@ -9,7 +9,7 @@
   </div>
 
   <div class="item item-body">
-    <img class="full-image" src="img/for-rent.jpg">
+    <img class="full-image" ng-src="http://rentalaspacelocator.com/uploads/{{profile.picture_uri}}">
     <p>
             {{profile.comments}}
     </p>
@@ -25,7 +25,7 @@
   </div>
 
   <div class="item tabs tabs-secondary tabs-icon-left">
-    <p><a class="button button-outline button-positive" href="#/app/item/{{profilelist.item_id}}">Send me a message</a>  </p>
+    <p><a class="button button-outline button-positive" href="#/app/message/{{profile.username}}">Send me a message</a>  </p>
   </div>
 
 </div>
