@@ -129,95 +129,7 @@ angular.module('starter.controllers', [])
 
 .controller('PostItemsCtrl', function($http, $scope, $rootScope, $ionicPopup, Profiles,  $cordovaFileTransfer, $cordovaCamera, $cordovaImagePicker) {
     
-    /*
-    *  Multiple image picker function
-    */
     
-     $scope.pickImages = function() {
-        var options = {
-          maximumImagesCount: 10,
-          width: 800,
-          height: 800,
-          quality: 80
-        };
-
-        $cordovaImagePicker.getPictures(options)
-            .then(function (results) {
-              for (var i = 0; i < results.length; i++) {
-                console.log('Image URI: ' + results[i]);
-                $scope.images.push(results[i]);
-              }
-            }, function(error) {
-              // error getting photos
-            });
-
-    };
-
-      $scope.removeImage = function(image) {
-        $scope.images = _.without($scope.images, image);
-      };
-    
-    
-    /**
-    *   Uploading function v2
-   
-    
-    $scope.takePicture = function() {
-
-		var options = {
-			quality: 45,
-			//destinationType: Camera.DestinationType.NATIVE_URI,
-			destinationType: Camera.DestinationType.FILE_URI,
-		        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-			allowEdit: true,
-			encodingType: Camera.EncodingType.JPEG,
-			targetWidth: 400,
-			targetHeight: 400,
-			popoverOptions: CameraPopoverOptions,
-			saveToPhotoAlbum: true
-		};
-
-		console.log( ">>>>> "+  options.destinationType );
-		console.log( ">>>>> "+  options.sourceType );
-
-		$cordovaCamera.getPicture(options).then(function(imageURI) {
-			$scope.newPost.picture = imageURI;
-			console.log("Pic taken: " + $scope.newPost.picture);
-		}, function(err) {
-			// error
-			console.log("Camera ERR: " + err);
-		});
-	};
-    
-      $scope.uploadPicture = function() {
-         var options = {
-            fileKey: "file",
-            fileName: imageURI.substr(imageURI.lastIndexOf('/')+1),
-            chunkedMode: false,
-            mimeType: "image/jpg",
-             params: {
-            "text": text,
-            "channel_id": chId,
-            "headers": {
-                'Authorization': credentials.token_type + ' ' + credentials.access_token
-                }
-            }
-         };
-
-         $cordovaFileTransfer.upload("http://rentalaspacelocator.com/user/appupload", imageURI, options, true).then(function(result) {
-                    console.log("New post with picture success");
-                    return JSON.parse(result.response);
-                  }, function(err) {
-                        console.log("ERROR: " + JSON.stringify(err)); 
-                        console.log(  options );
-                        console.log( imageURI );
-                  }, function (progress) {
-                        // constant progress updates
-                        console.log( progress );
-                  });
-
-      }
-       */
     /**
     *    Uploading Function v1
     **/
@@ -238,13 +150,10 @@ angular.module('starter.controllers', [])
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
             $scope.name = $rootScope.user;
-            //console.log(imageData);
-            //console.log(options);   
+           
             $scope.uploadUri = imageData;
             var server = "http://rentalaspacelocator.com/user/appupload",
             filePath = imageData;
-
-            var date = new Date();
 
             var options = {
                 fileKey: "file",
@@ -257,13 +166,11 @@ angular.module('starter.controllers', [])
             };
 
             $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
-                alert("ImageData:" + filePath);
-                alert("success");
-                alert(JSON.stringify(result.response));
-
+                    $scope.showAlert('Information Posted!');	
+                     $scope.item = null;
             }, function(err) {
-                console.log("ERROR: " + JSON.stringify(err));
-                //alert(JSON.stringify(err));
+                //console.log("ERROR: " + JSON.stringify(err));
+                alert(JSON.stringify(err));
             }, function (progress) {
                 // constant progress updates
             });
