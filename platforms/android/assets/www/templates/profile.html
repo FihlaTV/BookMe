@@ -1,0 +1,52 @@
+<ion-view view-title="Profile">
+  <ion-content>
+
+    <div class="list card">
+
+      <div class="item item-avatar">
+        <h2>{{userprofile.fname}} {{userprofile.lname}}</h2>
+      </div>
+
+      <div class="item item-body">
+        <!--
+        <p>
+         <b>Name:</b>
+        </p>
+        -->
+        <p>
+         <b>Address: </b> {{userprofile.address}}
+        </p>
+        <p>
+         <b>Email: </b> {{userprofile.email}}
+        </p>
+        <p>
+         <b>Contact Number: </b> {{userprofile.contact_number}}
+        </p>
+        <p> 
+         <b>Birthday: </b> {{userprofile.birthday}}
+        </p>
+        <p> 
+         <b>Civil Status: </b> {{userprofile.civil_status}}
+        </p>
+        <p> 
+         <b>Age: </b> {{userprofile.age}} <b>Gender:</b> {{userprofile.gender}}
+        </p>
+          <hr>
+        <button class="button button-small button-balanced">
+            Apply for Lessor
+        </button>
+          <div style="float:right;">
+         <button class="button button-small button-positive" >
+            Feedbacks
+        </button> 
+        <button class="button button-small button-energized pull-right">                                                         
+            Edit Profile
+        </button> 
+          </div>
+      </div>
+       
+    </div>
+      
+            
+   </ion-content>
+</ion-view>

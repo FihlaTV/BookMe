@@ -17,22 +17,28 @@
     <input type="text" ng-model="item.location" placeholder="Location" required>
   </label>
   <label class="item item-input">
-    <input type="text" ng-model="item.price" placeholder="Price" required>
+    <input type="number" ng-model="item.price" placeholder="Price" required>
   </label>
   <label class="item item-input">
     <textarea ng-model="item.comments" placeholder="Description"></textarea>
   </label>
-  <button class="button button-block button-energized" ng-disabled="myForm.$invalid" ng-click="submit(item)">
+  <!--<button class="button button-block button-energized" ng-disabled="myForm.$invalid" ng-click="submit(item)">
   Submit
-  </button>
+  </button> -->
  <br>    
-<div class="item item-divider"> Upload Images </div>
-     <!-- <input class="bottom-marg-15" type="file"  name="file" file="file"> -->
-     <button class="button button-small button-full button-positive" ng-click="pickImages()" ng-cloak="">Pick Images</button>
-  <button class="button button-small button-full button-positive" ng-click="openPhotoLibrary()" ng-cloak="">Upload Image</button>
-  <img class="fit" ng-if="uploadUri" ng-src="{{uploadUri}}">
+<div class="item item-divider">Image to Upload</div>
+      <center><img class="fit" ng-if="uploadUri" ng-src="{{uploadUri}}"></center>
+     <!-- <input class="bottom-marg-15" type="file"  name="file" file="file"> 
+     <button class="button button-small button-full button-positive" ng-click="pickImages()" ng-cloak="">Pick Images</button>-->
+  <button class="button button-full button-positive" ng-click="openPhotoLibrary(item)" ng-disabled="myForm.$invalid" ng-cloak="">Submit</button>
+ 
 </div>
       </form>
 
+<div class="card">
+  <div class="item item-text-wrap">
+    <center>Please fill-up <b>all required fields</b> to be able to post an entry. Note that you will also be required to upload an image of your space for rent upon submission.</center>
+  </div>
+</div>
   </ion-content>
 </ion-view>

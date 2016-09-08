@@ -1,14 +1,26 @@
 <ion-view view-title="Dashboard" hide-back-button="true">
   <ion-content>
-      <button class="button button-assertive" ng-click="loadData()">
-            <i class="icon ion-ios-loop" ></i>
-          </button> &nbsp;&nbsp;
-      <!--
-	   <div class="card" ng-repeat="profilelist in profiles" >
-		  <div class="item item-divider">{{profilelist.name}}</div>
-		  <div class="item item-text-wrap">{{profilelist.deseg}}</div>
-	  </div> -->
+      <br>
       
+      <div class="card">
+          <div class="item item-divider">
+            Want to become a lessor?
+          </div>
+          <div class="item item-text-wrap">
+            This feature will enable you to post your space for rent.
+          </div>
+          <div class="item item-divider">
+            <button class="button button-small button-balanced" style="float:right;">
+             Apply Now!
+            </button>
+          </div>
+      </div>
+      <br>
+      <div class="item item-divider">Recent Postings</div> <br>
+      <button class="button button-assertive" ng-click="loadData()" style="float:right;">
+            <i class="icon ion-ios-loop" > Refresh</i>
+      </button> &nbsp;&nbsp;
+      <br><br>
       <div class="row responsive-sm">
         <div class="col" ng-repeat="profilelist in profiles">
          <div class="list card">
@@ -19,7 +31,7 @@
           </div>
 
           <div class="item item-body">
-            <img class="full-image" ng-src="img/for-rent.jpg">
+            <img class="full-image" ng-src="http://rentalaspacelocator.com/uploads/{{profilelist.picture_uri}}">
             <p>
               {{profilelist.location}}
             </p>

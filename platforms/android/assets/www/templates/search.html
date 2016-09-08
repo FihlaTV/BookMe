@@ -17,11 +17,11 @@
         <input type="text" ng-model="item.location" placeholder="Location">
       </label>
       <label class="item item-input">
-        FROM: <input type="text" ng-model="item.from_price" placeholder="Price Range" required> 
+        FROM: <input type="number" ng-model="item.from_price" placeholder="Price Range" required> 
       </label>
         <label class="item item-input">
             TO: 
-        <input type="text" ng-model="item.to_price" placeholder="Price Range" required>
+        <input type="number" ng-model="item.to_price" placeholder="Price Range" required>
       </label>
         
        <button class="button button-block button-positive" ng-disabled="myForm.$invalid" ng-click="search(item)">
@@ -41,7 +41,7 @@
           </div>
 
           <div class="item item-body">
-            <img class="full-image" ng-src="img/for-rent.jpg">
+            <img class="full-image" ng-src="http://rentalaspacelocator.com/uploads/{{profilelist.picture_uri}}">
             <p>
               {{profilelist.location}}
             </p>

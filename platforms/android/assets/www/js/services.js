@@ -1,5 +1,17 @@
 angular.module('starter.services', [])
 
+.factory('User', function($http) {
+    
+ return {
+        all: function() {
+          return $http.get("http://rentalaspacelocator.com/user/profile/");
+        },
+        get: function(username) {
+              return $http.get("http://rentalaspacelocator.com/user/profile/"+username);
+        }
+       };
+  
+})
 
 .factory('Profiles', function($http) {
     
