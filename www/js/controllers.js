@@ -30,10 +30,21 @@ angular.module('starter.controllers', [])
             //$scope.user = response.data;
            user.validate = response.data;
           
-           console.log(user.validate);
+           //console.log(user.validate);
            
            if(user.validate != 'false'){
             $rootScope.user = user.username;
+            
+               if (user.validate.lessor == 0){
+                    $rootScope.lessor = false;
+                    $scope.islessor = false;
+               }
+               else{
+                    $rootScope.lessor = true;
+                    $scope.islessor = true;
+               }
+               
+               console.log($scope.islessor);
 			$location.path('/app/dashboard');
             }else{
                 $scope.showAlert('Invalid username or password.');	
@@ -270,7 +281,7 @@ angular.module('starter.controllers', [])
 .controller('UserProfileCtrl', function($scope, User,  $rootScope){
      $scope.loadData = function () {
           $scope.name = $rootScope.user;
-         
+          $scope.islessor = $rootScope.lessor;
 	   User.get($scope.name).success(function(data){
           
              angular.forEach(data, function(value, key) {
