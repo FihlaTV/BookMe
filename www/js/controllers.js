@@ -262,7 +262,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ItemCtrl', function($scope, $stateParams ,  Profiles) {
+.controller('ItemCtrl', function($scope, $stateParams , Profiles, $ionicModal) {
     $scope.loadData = function () {
         Profiles.get().success(function(data){
                   
@@ -276,6 +276,20 @@ angular.module('starter.controllers', [])
     }
     
     $scope.loadData();
+    
+     $ionicModal.fromTemplateUrl('templates/sendmessage.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.sendmessage = modal;
+      });
+      $scope.openModal = function() {
+        $scope.sendmessage.show();
+      };
+      $scope.closeModal = function() {
+        $scope.sendmessage.hide();
+     };
+    
 })
 
 .controller('UserProfileCtrl', function($scope, User,  $rootScope){
