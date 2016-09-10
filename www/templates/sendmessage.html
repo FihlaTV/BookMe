@@ -7,13 +7,13 @@
       
        <div class="list">
           <label class="item item-input">
-            <input type="text" placeholder="Title">
+            <input type="text" placeholder="Title"  ng-model="mess.title">
           </label>
           <label class="item item-input">
-            <textarea placeholder="Message" stlye="height: 100px;"></textarea>
+            <textarea placeholder="Message" stlye="height: 100px;"  ng-model="mess.message"></textarea>
           </label>
            <br><br>
-          <a class="button button-full button-positive">
+          <a class="button button-full button-positive" ng-click="message(mess,profile.id)">
               Submit
           </a>
       </div>

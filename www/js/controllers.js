@@ -1,8 +1,76 @@
 angular.module('starter.controllers', [])
 
 
-.controller('Messages', function($scope) {
+.controller('Messages', function($scope, $http, $rootScope, $ionicModal) {
+      $http.post("http://rentalaspacelocator.com/user/messages/"+$rootScope.userid).success(function(data, status) {
+                     $scope.messages = data;
+                //console.log(data);
+          });
+    
+    $scope.showMessage = function(id){
+         angular.forEach($scope.messages, function(value, key) {
+                 if (value['id'] == id){
+                     $scope.submessage = value;
+                     
+                      var data = $.param({
+                          json: JSON.stringify({
+                              id:id
+                          })
+                      });
+         
+                     $http.post("http://rentalaspacelocator.com/user/appmessagestatus", data).success(function(data, status) {
+                         $scope.openmessage.show();
+                     }); 
+                 }
+                   
+         });
+    }
+    
+     $ionicModal.fromTemplateUrl('templates/openmessage.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.openmessage = modal;
+      });
+      $scope.openModal = function() {
+        $scope.openmessage.show();
+      };
+      $scope.closeModal = function() {
+        $scope.openmessage.hide();
+     };
+    
+     $ionicModal.fromTemplateUrl('templates/sendmessage.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.sendmessage = modal;
+      });
+    
+      $scope.openModal2 = function() {
+        $scope.sendmessage.show();
+        $scope.openmessage.hide();
+      };
+      $scope.closeModal2 = function() {
+        $scope.sendmessage.hide();
+     };
 
+     $scope.message = function (mess,id) {
+         id = $scope.submessage.id_from;
+
+         var data = $.param({
+                json: JSON.stringify({
+                    id_from:$rootScope.userid,
+                    id_to:id,
+                    title:mess.title,
+                    message:mess.message
+                })
+            });
+         
+         $http.post("http://rentalaspacelocator.com/user/appaddmessage", data).success(function(data, status) {
+                   $scope.sendmessage.hide();
+          });
+         
+     }
 
 })
 
@@ -34,7 +102,7 @@ angular.module('starter.controllers', [])
            
            if(user.validate != 'false'){
             $rootScope.user = user.username;
-            
+             $rootScope.userid = user.validate.id;
                if (user.validate.lessor == 0){
                     $rootScope.lessor = false;
                     $scope.islessor = false;
@@ -262,7 +330,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ItemCtrl', function($scope, $stateParams , Profiles, $ionicModal) {
+.controller('ItemCtrl', function($scope, $stateParams , Profiles, $ionicModal, $rootScope, $http) {
     $scope.loadData = function () {
         Profiles.get().success(function(data){
                   
@@ -289,6 +357,25 @@ angular.module('starter.controllers', [])
       $scope.closeModal = function() {
         $scope.sendmessage.hide();
      };
+
+     $scope.message = function (mess,id) {
+         console.log(id);
+            console.log($rootScope.userid);
+         var data = $.param({
+                json: JSON.stringify({
+                    id_from:$rootScope.userid,
+                    id_to:id,
+                    title:mess.title,
+                    message:mess.message
+                })
+            });
+         
+         $http.post("http://rentalaspacelocator.com/user/appaddmessage", data).success(function(data, status) {
+                   $scope.sendmessage.hide();
+          });
+         
+     }
+
     
 })
 
