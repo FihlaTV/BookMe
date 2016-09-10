@@ -15,8 +15,16 @@
       <option>House</option>
     </select>
   </label>
-  <label class="item item-input">
-    <input type="text" ng-model="item.location" placeholder="Location" required>
+  <label class="item item-input item-select">
+    <div class="input-label">
+      Location
+    </div>
+    <select  ng-model="item.location" required>
+      <option>Quezon City</option>
+      <option>Makati City</option>
+      <option>Taguig City</option>
+      <option selected>Metro Manila</option>
+    </select>
   </label>
   <label class="item item-input">
     <input type="number" ng-model="item.price" placeholder="Price" required>
