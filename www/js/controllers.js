@@ -391,7 +391,7 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('UserProfileCtrl', function($scope, User, $ionicModal, $rootScope){
+.controller('UserProfileCtrl', function($scope, User, $ionicModal, $rootScope, $http){
      $scope.loadData = function () {
           $scope.name = $rootScope.user;
           $scope.islessor = $rootScope.lessor;
@@ -418,6 +418,27 @@ angular.module('starter.controllers', [])
       $scope.editprofilecloseModal = function() {
         $scope.editprofile.hide();
      };
+    
+     $scope.editmyprofile = function(userprofile){
+         var data = $.param({
+                          json: JSON.stringify({
+                              id:$rootScope.userid,
+                              fname:userprofile.fname,
+                              lname:userprofile.lname,
+                              address:userprofile.address,
+                              contact_number:userprofile.contact_number,
+                              birthday:userprofile.birthday,
+                              civil_status:userprofile.civil_status,
+                              age:userprofile.age,
+                              gender:userprofile.gender
+                          })
+                      });
+         
+                     $http.post("http://rentalaspacelocator.com/user/appeditprofile", data).success(function(data, status) {
+                          $scope.editprofile.hide();
+                     }); 
+    }
+    
     
 })
 
