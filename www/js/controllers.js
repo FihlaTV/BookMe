@@ -391,7 +391,7 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('UserProfileCtrl', function($scope, User,  $rootScope){
+.controller('UserProfileCtrl', function($scope, User, $ionicModal, $rootScope){
      $scope.loadData = function () {
           $scope.name = $rootScope.user;
           $scope.islessor = $rootScope.lessor;
@@ -404,6 +404,21 @@ angular.module('starter.controllers', [])
  }
     
     $scope.loadData();
+    
+    
+      $ionicModal.fromTemplateUrl('templates/editprofile.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.editprofile = modal;
+      });
+      $scope.editprofileopenModal = function() {
+        $scope.editprofile.show();
+      };
+      $scope.editprofilecloseModal = function() {
+        $scope.editprofile.hide();
+     };
+    
 })
 
 .controller('DashCtrl', function($scope, $stateParams , Profiles) {

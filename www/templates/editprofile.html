@@ -1,0 +1,59 @@
+<ion-modal-view view-title="Edit Profile">
+    <ion-header-bar>
+      <h1 class="title">Edit Profile</h1>
+         <div class="button button-clear" ng-click="editprofile.hide()"><span class="icon ion-close"></span></div>
+    </ion-header-bar>
+  <ion-content>
+       <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="First Name"  ng-model="userprofile.fname">
+          </label>
+            <label class="item item-input">
+            <input type="text" placeholder="Last Name"  ng-model="userprofile.lname">
+          </label>
+            </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Address"  ng-model="userprofile.address">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Contact Number"  ng-model="userprofile.contact_number">
+          </label> 
+          <label class="item item-input">
+            <input type="date" placeholder="Birthday"  ng-model="userprofile.birthday">
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Civil Status
+            </div>
+            <select ng-model="userprofile.civil_status" required>
+              <option>Single</option>
+              <option>Married</option>
+              <option>Widowed</option>
+            </select>
+          </label>
+        
+          <label class="item item-input">
+            <input type="number" placeholder="Age"  ng-model="userprofile.age">
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Gender
+            </div>
+            <select ng-model="userprofile.gender" required>
+              <option>Female</option>
+              <option>Male</option>
+            </select>
+          </label>
+           
+           
+           
+           
+           
+           <br><br>
+          <a class="button button-full button-positive" ng-click="message(mess,profile.id)">
+              Submit
+          </a>
+      </div>
+      </ion-content>
+</ion-modal-view>
+
