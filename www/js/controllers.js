@@ -76,7 +76,19 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout,  $location, $ionicPopup, $http, $rootScope, Profiles) {
 
-
+    $ionicModal.fromTemplateUrl('templates/applylessor.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.applylessor = modal;
+      });
+    
+      $scope.applylessoropenModal = function() {
+        $scope.applylessor.show();
+      };
+      $scope.applylessorcloseModal = function() {
+        $scope.applylessor.hide();
+     };
 	
   // Form data for the login modal
   $scope.loginData = {};

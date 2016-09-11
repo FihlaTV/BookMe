@@ -1,0 +1,19 @@
+
+<ion-modal-view view-title="Open Message">
+    <ion-header-bar>
+      <h1 class="title">{{submessage.title}} </h1>
+         <div class="button button-primary" ng-click="openmessage.hide()"><span class="icon ion-close"></span></div>
+    </ion-header-bar>
+  <ion-content>
+      
+       <div class="card">
+      <div class="item item-text-wrap">
+        <h2>FROM: {{submessage.fname}}  {{submessage.lname}}</h2>
+          <hr><br>
+          {{submessage.message}}
+      </div>
+    </div>
+      <br><br>
+<button class="button button-full button-positive" ng-click="openModal2()" >Reply</button>
+      </ion-content>
+</ion-modal-view>
