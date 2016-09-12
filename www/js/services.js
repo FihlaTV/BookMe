@@ -8,6 +8,9 @@ angular.module('starter.services', [])
         },
         get: function(username) {
               return $http.get("http://rentalaspacelocator.com/user/profile/"+username);
+        },
+        getuser: function(id) {
+              return $http.get("http://rentalaspacelocator.com/user/publicprofile/"+id);
         }
        };
   

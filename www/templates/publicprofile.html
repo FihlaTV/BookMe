@@ -1,0 +1,37 @@
+<ion-view view-title="Public Profile">
+  <ion-content>
+
+    <div class="list card">
+
+      <div class="item item-avatar">
+          <img src="img/user.png">
+          <h2>{{userprofile.fname}} {{userprofile.lname}}</h2>
+          <p> {{userprofile.username}}</p>
+      </div>
+
+      <div class="item item-body">
+    
+        <p>
+         <b>Contact Number: </b> {{userprofile.contact_number}}
+        <br>
+         <b>Birthday: </b> {{userprofile.birthday | date:'MM/dd/yyyy'}}
+       <br>
+         <b>Civil Status: </b> {{userprofile.civil_status}}
+       <br>
+      
+         <b>Age: </b> {{userprofile.age}} <br> <b>Gender:</b> {{userprofile.gender}}
+        </p>
+          <hr>
+      
+          <div style="float:right;">
+         <button class="button button-small button-positive" >
+           Add Feedback
+        </button> 
+          </div>
+      </div>
+       
+    </div>
+      
+            
+   </ion-content>
+</ion-view>

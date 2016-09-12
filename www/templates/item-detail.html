@@ -2,15 +2,15 @@
   <ion-content>
 
 <div class="list card">
-
-  <div class="item item-icon-left item-icon-right">
-    <a href="#" class="icon ion-person"></a>
-    <h2>{{profile.fname}} {{profile.lname}}</h2>
-  </div>
-
+  
+    <a href="#/app/publicprofile/{{profile.id}}" class="item item-avatar"><img src="img/user.png">
+         <h2>{{profile.fname}} {{profile.lname}}</h2>
+        <p>{{profile.date_created}}</p>
+        </a>
   <div class="item item-body">
     <img class="full-image" ng-src="http://rentalaspacelocator.com/uploads/{{profile.picture_uri}}">
     <p>
+             
             {{profile.comments}}
     </p>
         <div class="item item-divider">

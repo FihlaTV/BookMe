@@ -342,7 +342,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ItemCtrl', function($scope, $stateParams , Profiles, $ionicModal, $rootScope, $http) {
+.controller('ItemCtrl', function($scope, $stateParams, User, Profiles, $ionicModal, $rootScope, $http) {
     $scope.loadData = function () {
         Profiles.get().success(function(data){
                   
@@ -356,6 +356,9 @@ angular.module('starter.controllers', [])
     }
     
     $scope.loadData();
+    
+    
+    
     
      $ionicModal.fromTemplateUrl('templates/sendmessage.html', {
         scope: $scope,
@@ -391,6 +394,24 @@ angular.module('starter.controllers', [])
     
 })
 
+.controller('PublicProfileCtrl', function($scope, User, $ionicModal,$stateParams, $rootScope, $http){
+    $scope.loadUserData = function () {
+          $scope.name = parseInt($stateParams.profileId);
+        
+	   User.getuser($scope.name).success(function(data){
+          
+             angular.forEach(data, function(value, key) {
+                  //if (value['username'] == parseInt($stateParams.profileId)){
+                     $scope.userprofile = value;
+                 // }
+                });
+        });
+    }
+    
+    $scope.loadUserData();
+    
+})
+
 .controller('UserProfileCtrl', function($scope, User, $ionicModal, $rootScope, $http){
      $scope.loadData = function () {
           $scope.name = $rootScope.user;
@@ -401,7 +422,7 @@ angular.module('starter.controllers', [])
                      $scope.userprofile = value;
                 });
         });
- }
+    }
     
     $scope.loadData();
     
