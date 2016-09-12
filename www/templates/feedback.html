@@ -1,0 +1,19 @@
+<ion-modal-view view-title="Add Feedback">
+    <ion-header-bar>
+      <h1 class="title">Add Feedback</h1>
+         <div class="button button-clear" ng-click="feedback.hide()"><span class="icon ion-close"></span></div>
+    </ion-header-bar>
+  <ion-content>
+      
+       <div class="list">
+          <label class="item item-input">
+            <textarea placeholder="Message" stlye="height: 100px;"  ng-model="feedback.message"></textarea>
+          </label>
+           <br><br>
+          <a class="button button-full button-positive" ng-click="addfeedback(feedback)">
+              Submit
+          </a>
+      </div>
+      </ion-content>
+</ion-modal-view>
+

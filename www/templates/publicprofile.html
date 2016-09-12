@@ -24,13 +24,26 @@
           <hr>
       
           <div style="float:right;">
-         <button class="button button-small button-positive" >
+         <button class="button button-small button-positive" ng-click="feedback.show()">
            Add Feedback
         </button> 
           </div>
       </div>
        
     </div>
+    <br>
+ <div class="item item-divider">Feedbacks</div>
+   <div class="list">
+
+    <a class="item item-avatar" href="#" ng-repeat="feed in userfeedback">
+      <img src="img/user.png">
+      <h2>{{feed.fname}} {{feed.lname}}</h2>
+      <p> {{feed.date_created}}
+          <br>
+          {{feed.message}}</p>
+    </a>
+
+  </div>   
       
             
    </ion-content>

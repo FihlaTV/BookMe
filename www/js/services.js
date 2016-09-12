@@ -11,6 +11,9 @@ angular.module('starter.services', [])
         },
         getuser: function(id) {
               return $http.get("http://rentalaspacelocator.com/user/publicprofile/"+id);
+        },
+        getfeedback: function(id) {
+              return $http.get("http://rentalaspacelocator.com/user/publicfeedback/"+id);
         }
        };
   

@@ -372,6 +372,8 @@ angular.module('starter.controllers', [])
       $scope.closeModal = function() {
         $scope.sendmessage.hide();
      };
+    
+    
 
      $scope.message = function (mess,id) {
          console.log(id);
@@ -401,14 +403,54 @@ angular.module('starter.controllers', [])
 	   User.getuser($scope.name).success(function(data){
           
              angular.forEach(data, function(value, key) {
-                  //if (value['username'] == parseInt($stateParams.profileId)){
+               
                      $scope.userprofile = value;
-                 // }
+  
                 });
         });
     }
     
     $scope.loadUserData();
+    
+    $ionicModal.fromTemplateUrl('templates/feedback.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.feedback = modal;
+      });
+      $scope.openModal = function() {
+        $scope.feedback.show();
+      };
+      $scope.closeModal = function() {
+        $scope.feedback.hide();
+     };
+    
+    $scope.loadfeedback = function(){
+         User.getfeedback($scope.name).success(function(data){
+          
+                        
+                                 $scope.userfeedback = data;
+                    });
+    }
+    
+     $scope.loadfeedback();
+    
+     $scope.addfeedback = function (feedback) {
+        
+         var data = $.param({
+                json: JSON.stringify({
+                    id_from:$rootScope.userid,
+                    id_to: $scope.name,
+                    message:feedback.message
+                })
+            });
+         
+         $http.post("http://rentalaspacelocator.com/user/appaddfeedback", data).success(function(data, status) {
+                   $scope.feedback.hide();
+                    $scope.loadfeedback();
+          });
+         
+     }
     
 })
 
