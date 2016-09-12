@@ -435,6 +435,13 @@ angular.module('starter.controllers', [])
     
      $scope.loadfeedback();
     
+    if($scope.name == $rootScope.userid){
+         $scope.isuser = true;
+    }else{
+         $scope.isuser = false;
+    }
+   
+     
      $scope.addfeedback = function (feedback) {
         
          var data = $.param({
