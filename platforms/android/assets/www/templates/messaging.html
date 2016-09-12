@@ -31,12 +31,13 @@
                  on-swipe-left="hideTime = false"
                  on-swipe-right="hideTime = true">
             <br><br>
-      <div>
+      <div ng-repeat="mess in messages">
 
-          <div class="list list-inset">
-        <a class="item item-icon-left" href="#">
+        <div class="list list-inset" ng-if="mess.status != 0">   
+          <a class="item item-icon-left" ng-click="showMessage(mess.id)">
             <i class="icon ion-email"></i>
-            Read Mail 1
+            {{mess.title}}<br>
+             {{mess.date_created}}
           </a>
         </div>
 

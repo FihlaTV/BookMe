@@ -17,13 +17,10 @@
          <b>Address: </b> {{userprofile.address}}
         </p>
         <p>
-         <b>Email: </b> {{userprofile.email}}
-        </p>
-        <p>
          <b>Contact Number: </b> {{userprofile.contact_number}}
         </p>
         <p> 
-         <b>Birthday: </b> {{userprofile.birthday}}
+         <b>Birthday: </b> {{userprofile.birthday | date:'MM/dd/yyyy'}}
         </p>
         <p> 
          <b>Civil Status: </b> {{userprofile.civil_status}}
@@ -32,14 +29,14 @@
          <b>Age: </b> {{userprofile.age}} <b>Gender:</b> {{userprofile.gender}}
         </p>
           <hr>
-        <button class="button button-small button-balanced">
+        <button class="button button-small button-balanced" ng-if="islessor==false" ng-click="applylessor.show()">
             Apply for Lessor
         </button>
           <div style="float:right;">
          <button class="button button-small button-positive" >
             Feedbacks
         </button> 
-        <button class="button button-small button-energized pull-right">                                                         
+        <button class="button button-small button-energized pull-right" ng-click="editprofile.show()">                                                         
             Edit Profile
         </button> 
           </div>

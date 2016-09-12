@@ -2,7 +2,7 @@
   <ion-content>
       <br>
       
-      <div class="card">
+      <div class="card" ng-if="islessor==false">
           <div class="item item-divider">
             Want to become a lessor?
           </div>
@@ -10,7 +10,7 @@
             This feature will enable you to post your space for rent.
           </div>
           <div class="item item-divider">
-            <button class="button button-small button-balanced" style="float:right;">
+            <button class="button button-small button-balanced" style="float:right;" ng-click="applylessor.show()">
              Apply Now!
             </button>
           </div>

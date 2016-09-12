@@ -151,6 +151,16 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services', 
 	 authStatus: true
   })
   
+       .state('app.help', {
+    url: '/help',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/help.html'
+      }
+     },
+	 authStatus: true
+  })
+  
   .state('app.item', {
     url: '/item/:profileId',
     views: {
