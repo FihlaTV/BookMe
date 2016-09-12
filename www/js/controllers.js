@@ -465,7 +465,7 @@ angular.module('starter.controllers', [])
      $scope.loadData = function () {
           $scope.name = $rootScope.user;
           $scope.islessor = $rootScope.lessor;
-	   User.get($scope.name).success(function(data){
+	   User.get($rootScope.userid).success(function(data){
           
              angular.forEach(data, function(value, key) {
                      $scope.userprofile = value;

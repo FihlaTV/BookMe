@@ -6,8 +6,8 @@ angular.module('starter.services', [])
         all: function() {
           return $http.get("http://rentalaspacelocator.com/user/profile/");
         },
-        get: function(username) {
-              return $http.get("http://rentalaspacelocator.com/user/profile/"+username);
+        get: function(id) {
+              return $http.get("http://rentalaspacelocator.com/user/profile/"+id);
         },
         getuser: function(id) {
               return $http.get("http://rentalaspacelocator.com/user/publicprofile/"+id);
