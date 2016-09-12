@@ -342,7 +342,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ItemCtrl', function($scope, $stateParams , Profiles, $ionicModal, $rootScope, $http) {
+.controller('ItemCtrl', function($scope, $stateParams, User, Profiles, $ionicModal, $rootScope, $http) {
     $scope.loadData = function () {
         Profiles.get().success(function(data){
                   
@@ -357,6 +357,9 @@ angular.module('starter.controllers', [])
     
     $scope.loadData();
     
+    
+    
+    
      $ionicModal.fromTemplateUrl('templates/sendmessage.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -369,6 +372,8 @@ angular.module('starter.controllers', [])
       $scope.closeModal = function() {
         $scope.sendmessage.hide();
      };
+    
+    
 
      $scope.message = function (mess,id) {
          console.log(id);
@@ -391,6 +396,71 @@ angular.module('starter.controllers', [])
     
 })
 
+.controller('PublicProfileCtrl', function($scope, User, $ionicModal,$stateParams, $rootScope, $http){
+    $scope.loadUserData = function () {
+          $scope.name = parseInt($stateParams.profileId);
+        
+	   User.getuser($scope.name).success(function(data){
+          
+             angular.forEach(data, function(value, key) {
+               
+                     $scope.userprofile = value;
+  
+                });
+        });
+    }
+    
+    $scope.loadUserData();
+    
+    $ionicModal.fromTemplateUrl('templates/feedback.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.feedback = modal;
+      });
+      $scope.openModal = function() {
+        $scope.feedback.show();
+      };
+      $scope.closeModal = function() {
+        $scope.feedback.hide();
+     };
+    
+    $scope.loadfeedback = function(){
+         User.getfeedback($scope.name).success(function(data){
+          
+                        
+                                 $scope.userfeedback = data;
+                    });
+    }
+    
+     $scope.loadfeedback();
+    
+    if($scope.name == $rootScope.userid){
+         $scope.isuser = true;
+    }else{
+         $scope.isuser = false;
+    }
+   
+     
+     $scope.addfeedback = function (feedback) {
+        
+         var data = $.param({
+                json: JSON.stringify({
+                    id_from:$rootScope.userid,
+                    id_to: $scope.name,
+                    message:feedback.message
+                })
+            });
+         
+         $http.post("http://rentalaspacelocator.com/user/appaddfeedback", data).success(function(data, status) {
+                   $scope.feedback.hide();
+                    $scope.loadfeedback();
+          });
+         
+     }
+    
+})
+
 .controller('UserProfileCtrl', function($scope, User, $ionicModal, $rootScope, $http){
      $scope.loadData = function () {
           $scope.name = $rootScope.user;
@@ -401,7 +471,7 @@ angular.module('starter.controllers', [])
                      $scope.userprofile = value;
                 });
         });
- }
+    }
     
     $scope.loadData();
     
