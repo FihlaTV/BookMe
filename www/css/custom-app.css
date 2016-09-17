@@ -1,12 +1,12 @@
 .loginBg{
 
-background: #E77471;
+background: #E5E4E2;
 
 }
 
 .menuBg{
 
-background: #E77471;
+background: #E5E4E2;
 
 }
 
@@ -16,5 +16,5 @@ background: #E77471;
 .remvoeBP{ padding-bottom:0px;}
 .removePM{ margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; }
 
-#menuLinks .list .item{ border-color:#BCC6CC;}
-#menuLinks .list .item a{ background:#E55451; color:#000000;}
+#menuLinks .list .item{ border-color:#E5E4E2;}
+#menuLinks .list .item a{ background:#2B60DE; color:#FFFFFF;}

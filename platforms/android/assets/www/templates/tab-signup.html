@@ -10,7 +10,7 @@
 
   <div class="row responsive-sm padding remvoeBP">
 	  <div class="col">
-		   <div class="app-logo"><img src="img/BPPlogo.png" height="200%" width="200%" style="margin-left: -50px;"></div>
+		   <div class="app-logo"><img src="img/Blue.png" height="400%" width="300%" style="margin-left: -100px;"></div>
 			<form name="myForm" novalidate>
 			<div class="list list-inset removePM">
 			  <label class="item item-input"><input type="text" ng-model="reg.fname" placeholder="First Name"  required> </label>
@@ -23,6 +23,11 @@
 				</ion-list>
 			<div class="loginButton"><button class="button ion-person button-block button-balanced" ng-click="register(reg);" ng-disabled="myForm.$invalid"> Register </button>  </div>
           </form>
+		  
+		  <div class="card">
+              <div class="item item-text-wrap"><center> *Please fill up all the required fields to register</center>
+              </div>
+            </div>
 	  </div>
   </div>
 
