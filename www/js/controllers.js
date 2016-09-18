@@ -2,11 +2,16 @@ angular.module('starter.controllers', [])
 
 
 .controller('Messages', function($scope, $http, $rootScope, $ionicModal) {
-      $http.post("http://rentalaspacelocator.com/user/messages/"+$rootScope.userid).success(function(data, status) {
-                     $scope.messages = data;
-                //console.log(data);
-          });
     
+      
+    $scope.loadData = function(){
+          $http.post("http://rentalaspacelocator.com/user/messages/"+$rootScope.userid).success(function(data, status) {
+                     $scope.messages = data;
+          });
+    }
+    
+     $scope.loadData();
+     
     $scope.showMessage = function(id){
          angular.forEach($scope.messages, function(value, key) {
                  if (value['id'] == id){
@@ -24,6 +29,14 @@ angular.module('starter.controllers', [])
                  }
                    
          });
+    }
+    
+    $scope.deletemessage = function(id){
+       $http.post("http://rentalaspacelocator.com/user/deletemessage/" + id).success(function(data, status) {
+                  $scope.showAlert('Successfully deleted item.');	
+                   $scope.loadData();
+                   $scope.openmessage.hide();
+          });
     }
     
      $ionicModal.fromTemplateUrl('templates/openmessage.html', {
