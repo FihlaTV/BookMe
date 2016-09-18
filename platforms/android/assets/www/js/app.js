@@ -161,6 +161,16 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services', 
 	 authStatus: true
   })
   
+  .state('app.publicprofile', {
+    url: '/publicprofile/:profileId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/publicprofile.html',
+        controller: 'PublicProfileCtrl'
+      }
+    }
+  })
+  
   .state('app.item', {
     url: '/item/:profileId',
     views: {
