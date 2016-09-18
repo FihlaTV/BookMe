@@ -171,6 +171,16 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services', 
     }
   })
   
+  .state('app.lessorposts', {
+    url: '/lessorposts',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/lessorposts.html',
+        controller: 'myItemCtrl'
+      }
+    }
+  })
+  
   .state('app.item', {
     url: '/item/:profileId',
     views: {

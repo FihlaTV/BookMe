@@ -37,7 +37,12 @@ angular.module('starter.services', [])
         get: function(profileId) {
               return $http.get("http://rentalaspacelocator.com/user/items");
           
+        },
+         getmyitems: function(profileId) {
+              return $http.get("http://rentalaspacelocator.com/user/myitems/" + profileId);
+          
         }
+     
        };
   
 });

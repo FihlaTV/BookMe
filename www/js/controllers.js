@@ -126,6 +126,9 @@ angular.module('starter.controllers', [])
                
                console.log($scope.islessor);
 			$location.path('/app/dashboard');
+               
+               user.username = null;
+               user.password = null;
             }else{
                 $scope.showAlert('Invalid username or password.');	
             }
@@ -258,7 +261,10 @@ angular.module('starter.controllers', [])
 
             $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
                     $scope.showAlert('Information Posted!');	
-                     $scope.item = null;
+                    $scope.item.space_type = null;
+                    $scope.item.location = null;
+                    $scope.item.price = null;
+                    $scope.item.comments = null;
             }, function(err) {
                 //console.log("ERROR: " + JSON.stringify(err));
                 alert(JSON.stringify(err));
@@ -334,12 +340,29 @@ angular.module('starter.controllers', [])
             });
          
           $http.post("http://rentalaspacelocator.com/user/searchitem", data).success(function(data, status) {
-                    console.log(data);
-              
                   $scope.profiles = data;
+              
           });
     };
 
+})
+
+.controller('myItemCtrl', function($scope, $stateParams, User, Profiles, $ionicModal, $rootScope, $http) {
+    $scope.loadData = function () {
+        Profiles.getmyitems($rootScope.userid).success(function(data){
+            $scope.profiles = data;
+        });
+    }
+    
+    $scope.loadData();
+    
+    $scope.deletemyitem = function(id){
+        $http.post("http://rentalaspacelocator.com/user/deletemyitem/" + id).success(function(data, status) {
+                  $scope.showAlert('Successfully deleted item.');	
+                   $scope.loadData();
+          });
+       
+    }
 })
 
 .controller('ItemCtrl', function($scope, $stateParams, User, Profiles, $ionicModal, $rootScope, $http) {
@@ -376,8 +399,8 @@ angular.module('starter.controllers', [])
     
 
      $scope.message = function (mess,id) {
-         console.log(id);
-            console.log($rootScope.userid);
+         //console.log(id);
+            //console.log($rootScope.userid);
          var data = $.param({
                 json: JSON.stringify({
                     id_from:$rootScope.userid,
